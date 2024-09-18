@@ -3,31 +3,26 @@ import Container from "./components/Container/Container";
 import FormattedTime from "./components/FormattedTime/FormattedTime";
 import Button from "./components/Button/Buton";
 
-function App() {
+const App = () => {
 
   const [time, setTime] = useState(0);
-  const [timer, setTimer] = useState(null);
+  const [start, setStart] = useState(null)
 
-  const start = () => {
-    setTimer(setInterval(() => {
-      setTime(prevValue => prevValue + 10);
-    }, 1))
-  };
-
-  const stop = () => {
-    clearInterval(timer);
-    setTimer(null);
-  }
-    
-  const reset = () => {
-    stop();
-    setTime(0);
-  }
+  useEffect(() => {
+    let timer;
+    if (start) {
+      timer = setInterval(() => { setTime(prevValue => prevValue + 10) }, 10);
+    }
+      return () => {
+        if(timer) clearInterval(timer);
+      }
+    }, [start]
+  )
 
   return (
     <Container>
       <FormattedTime time={time} />
-      <Button start={start} stop={stop} reset={reset} />
+      <Button  start={setStart} setTime={setTime} />
     </Container>
   );
 }
