@@ -1,12 +1,12 @@
 import styles from './Button.module.scss';
 
-const Button = () => {
+const Button = props => {
 
   return (
     <div>
-      <button className={styles.button} /*onClick*={}*/>START</button>
-      <button className={styles.button} /*onClick*={}*/>STOP</button>
-      <button className={styles.button} /*onClick*={}*/>RESET</button>
+      <button className={styles.button} onClick={props.start}>START</button>
+      <button className={styles.button} onClick={props.stop}>STOP</button>
+      <button className={styles.button} onClick={props.reset}>RESET</button>
     </div>
   );
 }
